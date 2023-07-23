@@ -3,6 +3,8 @@ const app = express();
 const path = require('path');
 const authorizeSF = require('./middleware/authorize-sf.js');
 const postLead = require('./middleware/postLead.js');
+const postCase = require('./middleware/postCase.js');
+const handlePost = require('./middleware/postHandlers.js');
 
 app.use(express.static('./public'));
 
@@ -20,45 +22,15 @@ app.get('/lead', (req, res) => {
     res.status(200).sendFile(path.resolve(__dirname, './public/lead.html'));
 });
 
-app.post('/lead', authorizeSF, async (req, res) => {
-    if (req.authorization && req.authorization.success) {
-        const leadData = req.body;
-        console.log('Lead data in app.js:', leadData);
-        const accessToken = req.authorization.accessToken;
-        const instanceUrl = req.authorization.instanceUrl
-        const postLeadResult = await postLead(leadData, accessToken, instanceUrl);
-        if (postLeadResult.success) {
-            console.log(postLeadResult.data);
-            res.status(201).send('Created Lead');
-        } else {
-            console.log(postLeadResult.message);
-            res.status(500).send(postLeadResult.message);
-        }
-    } else {
-        console.log('Authorization Error:', req.authorization.error);
-        res.status(500).send(req.authorization.message);
-    }
-});
+app.post('/lead', authorizeSF, (req, res) => handlePost(postLead, 'Created Lead', req, res));
 // Case Get and Post
 
 app.get('/case', (req, res) => {
     res.status(200).sendFile(path.resolve(__dirname, './public/case.html'));
 });
 
-// Authorization test
-
-app.post('/auth', authorizeSF, (req, res) => {
-    if (req.authorization && req.authorization.success) {
-        console.log('Instance URL:', req.authorization.instanceUrl);
-        console.log('Access Token:', req.authorization.accessToken);
-        res.status(201).send('Successful Authorization');
-    } else {
-        console.log('Authorization Error:', req.authorization.error);
-        res.status(500).send(req.authorization.message);
-    }
-});
+app.post('/case', authorizeSF, (req, res) => handlePost(postCase, 'Created Case', req, res));
 
 app.listen(5500, (req, res) => {
     console.log('Listening on Port 5500...');
-    //console.log(consumerKey, consumerSecret);
 });

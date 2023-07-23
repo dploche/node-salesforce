@@ -1,9 +1,9 @@
 const axios = require('axios');
 require('dotenv').config();
 const env = process.env;
-const leadResource = env.leadResource;
+const caseResource = env.caseResource;
 
-async function postLead(leadData, accessToken, instanceUrl) {
+async function postCase(caseData, accessToken, instanceUrl){
     try {
         const options = {
             headers: {
@@ -12,13 +12,13 @@ async function postLead(leadData, accessToken, instanceUrl) {
             }
         };
         
-        const externalServerResponse = await axios.post(`${instanceUrl}${leadResource}`, leadData, options);
+        const externalServerResponse = await axios.post(`${instanceUrl}${caseResource}`, caseData, options);
         return { success: true, data: externalServerResponse.data };
     } catch (error) {
         console.log(error.response);
         console.error('Error sending data to external server:', error.message);
         return { success: false, message: 'Error sending data to external server' };
     }
-}
+};
 
-module.exports = postLead;
+module.exports = postCase;

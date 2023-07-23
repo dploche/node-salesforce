@@ -162,3 +162,7 @@ h1 {
     visibility: visible;
     opacity: 1;
 }
+
+.error-toast {
+    background-color: #f44336; /* red */
+}

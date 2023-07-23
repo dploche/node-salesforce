@@ -2,14 +2,15 @@ document.querySelector('.form').addEventListener('submit', function(e) {
     e.preventDefault();
     
     let data = {
-        FirstName: document.getElementById('first-name').value,
-        LastName: document.getElementById('last-name').value,
-        MobilePhone: document.getElementById('mobile').value,
-        Email: document.getElementById('email').value,
-        Company: document.getElementById('company').value
+        SuppliedName: document.getElementById('name').value,
+        SuppliedPhone: document.getElementById('phone').value,
+        SuppliedEmail: document.getElementById('email').value,
+        Subject: document.getElementById('subject').value,
+        Description: document.getElementById('description').value,
+        Origin : 'Web'
     };    
 
-    axios.post('/lead', data)
+    axios.post('/case', data)
     .then(response => {
         document.getElementById('toast-message').innerText = response.data;
         const toast = document.getElementById('toast');
