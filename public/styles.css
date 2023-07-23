@@ -140,3 +140,25 @@ h1 {
 .back-button:hover {
     background-color: #5a6268;
 }
+
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 20px;
+    background-color: #4CAF50;
+    color: white;
+    opacity: 0.9;
+    transition: opacity 0.5s;
+    border-radius: 10px;
+}
+
+.toast.hidden {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.toast.visible {
+    visibility: visible;
+    opacity: 1;
+}

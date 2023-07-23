@@ -23,7 +23,8 @@ function authorizeSF(req, res, next){
     .then(response => {
         req.authorization = {
             success: true,
-            accessToken: response.data.access_token
+            accessToken: response.data.access_token,
+            instanceUrl: response.data.instance_url
         };
         next();
     })
