@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Create Account</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div id="error-toast" class="toast hidden error-toast">
+            <p id="error-toast-message"></p>
+        </div>
+        <div id="toast" class="toast hidden">
+            <p id="toast-message"></p>
+        </div>
+        <a href="/" class="button back-button">Back Home</a>
+        <div class="container">
+            <h1>Create Account</h1>            
+            <form class="form">
+                <input type="text" id="name" name="name" placeholder="Full Name" required>
+                <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
+                <input type="submit" value="Submit" class="button">
+            </form>
+        </div>
+        <div class="watermark">Developed by D. Ploche</div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+        <script src="accountHandler.js"></script>
+    </body>
+</html>
